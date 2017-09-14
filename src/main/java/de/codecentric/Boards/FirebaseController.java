@@ -9,13 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
-public class FirebaseController implements Controller{
+public class FirebaseController implements Controller {
 
     @Value("${firebase.boardsUrl}")
     private String boardsUrl;
@@ -30,8 +27,25 @@ public class FirebaseController implements Controller{
 
     @Override
     public Map<String, Boards> getBoards() throws BoardRequestException {
+        Boards testBoard = new Boards();
+
+        ResponseEntity<Map<String, Boards>> responseBoard = restTemplate.exchange(boardsUrl, HttpMethod.GET,
+                null, TYPE_REFENCE);
+        if (responseBoard.hasBody()) {
+            return responseBoard.getBody();
+        } else {
+            return Collections.emptyMap();
+        }
+    }
+
+    @Override
+    public Map<String, Boards> getBoards(Map<String, Boards> map) throws BoardRequestException {
         ResponseEntity<Map<String, Boards>> boards = restTemplate.exchange(boardsUrl, HttpMethod.GET,
                 null, TYPE_REFENCE);
-        return null;
+        if (boards.hasBody()) {
+            return boards.getBody();
+        } else {
+            return Collections.emptyMap();
+        }
     }
 }
