@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import de.codecentric.Boards.BoardRequestException;
 import de.codecentric.Boards.Boards;
 import de.codecentric.Boards.FirebaseController;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +20,7 @@ public class IndexController extends FirebaseController{
 
 
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public String start() { return "hello world"; }
 
     /*@RequestMapping("/boards")
@@ -28,9 +29,8 @@ public class IndexController extends FirebaseController{
     }*/
 
 
-    @RequestMapping("/bb")
+    @RequestMapping(value = "/bb", method = RequestMethod.GET)
     public JSONPObject boardMap (){
-
 
         try {
             Map boards = getBoards();
