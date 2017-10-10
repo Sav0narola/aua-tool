@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/LogoBetrieb.png">
+    <img src="./assets/auaLogo.svg">
     <chart></chart>
     <div class="container">
       <div class="Chart">

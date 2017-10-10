@@ -10,7 +10,7 @@ export default {
   name: 'chart',
   data() {
     return {
-      msg: 'Feel the AUA', msg2: 'Analysis of User Acceptance made easy',
+      msg: 'codecentric Remote-Retro-Tool Analysis', msg2: 'Created Retrospective-Board over Time',
     };
   },
 };

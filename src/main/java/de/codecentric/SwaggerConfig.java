@@ -26,7 +26,7 @@ public class SwaggerConfig {
     private static ApiInfo getApiInfo() {
         return new ApiInfoBuilder()
                 .title("AUA-Tool")
-                .description("Analysis of User Acceptance Metrics Tool")
+                .description("Analysis of User Acceptance Tool")
                 .build();
     }
 }
