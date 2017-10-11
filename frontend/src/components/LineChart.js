@@ -1,5 +1,5 @@
 import { Line } from 'vue-chartjs';
-import { axios } from 'axios';
+// import { axios } from 'axios';
 
 export default Line.extend({
   mounted() {
@@ -13,12 +13,6 @@ export default Line.extend({
     this.gradient2.addColorStop(0, 'rgba(0, 231, 255, 0.9)');
     this.gradient2.addColorStop(0.5, 'rgba(0, 231, 255, 0.25)');
     this.gradient2.addColorStop(1, 'rgba(0, 231, 255, 0)');
-
-    axios.get('http://jsonplaceholder.typicode.com/posts')
-      .then((response) => { this.posts = response.data; })
-      .catch((e) => {
-        this.errors.push(e);
-      });
 
     const myMonths = ['August', 'September', 'Oktober', 'November', 'Dezember'];
     const values = [20, 23, 90, 25, 40];
@@ -35,7 +29,7 @@ export default Line.extend({
 
 
     this.renderChart({
-      labels: myMonths,
+      labels: [myMonths, 'Data'],
       datasets: [
         {
           label: 'Data one from August',

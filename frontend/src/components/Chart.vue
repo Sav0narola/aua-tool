@@ -10,7 +10,7 @@ export default {
   name: 'chart',
   data() {
     return {
-      msg: 'codecentric Remote-Retro-Tool Analysis', msg2: 'Created Retrospective-Board over Time',
+      msg: 'codecentric Remote-Retro-Tool Analysis', msg2: 'Created Retrospective-Boards over Time',
     };
   },
 };
