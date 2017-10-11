@@ -17,7 +17,8 @@ export default Line.extend({
     const myMonths = ['August', 'September', 'Oktober', 'November', 'Dezember'];
     const values = [20, 23, 90, 25, 40];
 
-    // const myMonth = function() {
+    // const myMonth = setMonth()
+    // {
     //   for month in myMonth {
     //     let returnMonth;
     //
@@ -32,7 +33,7 @@ export default Line.extend({
       labels: [myMonths, 'Data'],
       datasets: [
         {
-          label: 'Data one from August',
+          label: 'Created Boards per Month',
           borderColor: '#FC2525',
           pointBackgroundColor: 'white',
           borderWidth: 1,
@@ -40,7 +41,7 @@ export default Line.extend({
           backgroundColor: this.gradient,
           data: values,
         }, {
-          label: 'Created Boards per Month',
+          label: 'Source: Remote Retro-Tool',
           borderColor: '#05CBE1',
           pointBackgroundColor: 'white',
           pointBorderColor: 'white',

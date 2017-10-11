@@ -37,8 +37,7 @@ public class IndexController {
     @RequestMapping(value = "/boardsPerMonth", method = RequestMethod.GET, produces = "application/json")
     public String getBoardsPerMonth(){
         // TODO ->  FirebaseController (Service) get String to Boards Map
-        //          MonthToBoardsMapper -> read BoardsMap and map to Months to Amount of Boards and return value
-
+        // Graphmapper autowiren und die firebase.Service boards einfüllen
         return "";
     }
 }
