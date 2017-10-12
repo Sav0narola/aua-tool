@@ -1,11 +1,13 @@
 package de.codecentric.Boards;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
+@Component
 public class GraphMapper {
 
     private static final String noDate = "noDate";
@@ -16,7 +18,7 @@ public class GraphMapper {
     GraphMapper(TimestampToMonthConverter timestampToMonthConverter) {
         this.timestampToMonthConverter = timestampToMonthConverter; }
 
-    public String mapMonthsToBoardAmount(Map<String, Board> boards) {
+    public Map<String, Integer> mapMonthsToBoardAmount(Map<String, Board> boards) {
 
         Map<String, Integer> monthsMappedToBoardcount = new HashMap<>();
 
@@ -46,6 +48,6 @@ public class GraphMapper {
             }
         }
 
-        return "HIER DAS VON DER MAP monthsMappedToBoardcount GEBILDETE JSON";
+        return monthsMappedToBoardcount;
     }
 }

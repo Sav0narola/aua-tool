@@ -1,5 +1,7 @@
 package de.codecentric.Boards;
 
+import com.google.common.collect.Maps;
+import io.swagger.models.auth.In;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -21,9 +23,10 @@ public class GraphMapperTest {
 
 
         System.out.println(boards);
-        String result = graphMapper.mapMonthsToBoardAmount(boards);
+        Map<String, Integer> result = graphMapper.mapMonthsToBoardAmount(boards);
 
-        String expected = "[{\"OCTOBER\": 2]";
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("OCTOBER", 2);
         assertThat(result).isEqualTo(expected);
     }
 }

@@ -1,9 +1,6 @@
 package de.codecentric.Boards;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import de.codecentric.Boards.Board;
-import de.codecentric.Boards.BoardRequestException;
-import de.codecentric.Boards.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +13,7 @@ import java.util.Map;
 public class IndexController {
 
     @Autowired FirebaseService firebaseService;
+    @Autowired GraphMapper graphMapper;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public String start() { return "hello world"; }
@@ -25,7 +23,7 @@ public class IndexController {
 
         try {
             Map<String, Board> boards = firebaseService.getBoards();
-            JSONPObject JsonDemo = new JSONPObject("First Statistic", boards);
+            JSONPObject JsonDemo = new JSONPObject("The JSON.fetch from the Firebase-DB", boards);
 
             return JsonDemo;
         } catch (BoardRequestException e) {
@@ -35,9 +33,15 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/boardsPerMonth", method = RequestMethod.GET, produces = "application/json")
-    public String getBoardsPerMonth(){
-        // TODO ->  FirebaseController (Service) get String to Boards Map
-        // Graphmapper autowiren und die firebase.Service boards einfüllen
-        return "";
+    public JSONPObject getBoardsPerMonth(){
+
+        try {
+            Map<String, Integer> resultMap = graphMapper.mapMonthsToBoardAmount(firebaseService.getBoards());
+
+            return new JSONPObject("Loaded the amount of Boards into the mapped Map", resultMap);
+        } catch (BoardRequestException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
