@@ -1,5 +1,4 @@
 import { Line } from 'vue-chartjs';
-// import { axios } from 'axios';
 
 export default Line.extend({
   mounted() {
@@ -14,23 +13,26 @@ export default Line.extend({
     this.gradient2.addColorStop(0.5, 'rgba(0, 231, 255, 0.25)');
     this.gradient2.addColorStop(1, 'rgba(0, 231, 255, 0)');
 
-    const myMonths = ['August', 'September', 'Oktober', 'November', 'Dezember'];
-    const values = [20, 23, 90, 25, 40];
+    /*eslint-disable */
 
-    // const myMonth = setMonth()
-    // {
-    //   for month in myMonth {
-    //     let returnMonth;
-    //
-    //     returnMonth = month.index;
-    //
-    //     return returnMonth[index];
-    //   }
-    // }
+    //const myMonths = ['August', 'September', 'Oktober', 'November', 'Dezember'];
+    //const values = [20, 23, 90, 25, 40];
 
+    let data = fetch('localhost:8080/boardsPerMonth');
+
+    const myKeys = Array;
+    const myValues = Array;
+
+    for (let [key, value] of Object.entries(data)) {
+      console.log(key, value);
+      myKeys.push(key)
+      myValues.push(value);
+    }
+
+    console.log(myValues);
 
     this.renderChart({
-      labels: [myMonths, 'Data'],
+      labels: myKeys,
       datasets: [
         {
           label: 'Created Boards per Month',
@@ -51,5 +53,5 @@ export default Line.extend({
         },
       ],
     }, { reponsive: true, maintainAspectRatio: false });
-  },
+  /*eslint-enable */ },
 });
