@@ -13,8 +13,12 @@ public class TimestampToMonthConverter {
         LocalDateTime localDateTime  =
                 LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
 
-        String month = localDateTime.getMonth().toString();
-
-        return month;
+        Integer month = localDateTime.getMonth().getValue();
+        Integer year = localDateTime.getYear();
+        if(month < 10){
+            return year + "-0" + month;
+        }else {
+            return year + "-" +month;
+        }
     }
 }

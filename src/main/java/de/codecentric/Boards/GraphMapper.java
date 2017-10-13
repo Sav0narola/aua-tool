@@ -3,9 +3,11 @@ package de.codecentric.Boards;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 @Component
 public class GraphMapper {
@@ -48,6 +50,11 @@ public class GraphMapper {
             }
         }
 
-        return monthsMappedToBoardcount;
+        Map<String, Integer> sortedMap = monthsMappedToBoardcount.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        return sortedMap;
     }
 }
