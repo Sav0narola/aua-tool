@@ -25,14 +25,14 @@ export default Line.extend({
 
     for (let [key, value] of Object.entries(data)) {
       console.log(key, value);
-      myKeys.push(key)
+      myKeys.push(key);
       myValues.push(value);
     }
 
     console.log(myValues);
 
     this.renderChart({
-      labels: myKeys,
+      labels: myKeys, myValues,
       datasets: [
         {
           label: 'Created Boards per Month',
@@ -41,7 +41,7 @@ export default Line.extend({
           borderWidth: 1,
           pointBorderColor: 'white',
           backgroundColor: this.gradient,
-          data: values,
+          data: myKeys,
         }, {
           label: 'Source: Remote Retro-Tool',
           borderColor: '#05CBE1',
@@ -49,7 +49,7 @@ export default Line.extend({
           pointBorderColor: 'white',
           borderWidth: 1,
           backgroundColor: this.gradient2,
-          data: [10, 12, 23, 47, 89],
+          data: myValues,
         },
       ],
     }, { reponsive: true, maintainAspectRatio: false });
