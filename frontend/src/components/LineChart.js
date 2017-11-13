@@ -1,6 +1,6 @@
-import { Line } from 'vue-chartjs';
+import { Bar } from 'vue-chartjs';
 
-export default Line.extend({
+export default Bar.extend({
   mounted() {
     this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450);
     this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450);
@@ -18,10 +18,10 @@ export default Line.extend({
     //const myMonths = ['August', 'September', 'Oktober', 'November', 'Dezember'];
     //const values = [20, 23, 90, 25, 40];
 
-    let data = fetch('localhost:8080/boardsPerMonth');
+    let data = fetch('http://localhost:8080/boardsPerMonth');
 
-    const myKeys = Array;
-    const myValues = Array;
+    let myKeys = Array;
+    let myValues = Array;
 
     for (let [key, value] of Object.entries(data)) {
       console.log(key, value);
