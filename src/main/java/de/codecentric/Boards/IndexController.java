@@ -35,12 +35,12 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/boardsPerMonth", method = RequestMethod.GET, produces = "application/json")
-    public JSONPObject getBoardsPerMonth(){
+    public Object getBoardsPerMonth(){
 
         try {
             Map<String, Integer> resultMap = graphMapper.mapMonthsToBoardAmount(firebaseService.getBoards());
 
-            return new JSONPObject("Loaded the amount of Boards into the mapped Map", resultMap);
+            return new JSONPObject("", resultMap).getValue();
         } catch (BoardRequestException e) {
             e.printStackTrace();
         }

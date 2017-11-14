@@ -1,7 +1,7 @@
-import { Bar } from 'vue-chartjs';
+import { PolarArea } from 'vue-chartjs';
 
-export default Bar.extend({
-  mounted() {
+export default PolarArea.extend({
+  async mounted() {
     this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450);
     this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450);
 
@@ -18,21 +18,29 @@ export default Bar.extend({
     //const myMonths = ['August', 'September', 'Oktober', 'November', 'Dezember'];
     //const values = [20, 23, 90, 25, 40];
 
-    let data = fetch('http://localhost:8080/boardsPerMonth');
+    const APIURL = 'http://localhost:8080/boardsPerMonth';
 
-    let myKeys = Array;
-    let myValues = Array;
+    const returnJsonFromApi = await fetch(APIURL)
+      .then(function(resp) {
+        return resp.json();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-    for (let [key, value] of Object.entries(data)) {
+    var myKeys = new Array();
+    var myValues = new Array();
+
+    console.log(returnJsonFromApi);
+
+    for (let [key, value] of Object.entries(returnJsonFromApi)) {
       console.log(key, value);
       myKeys.push(key);
       myValues.push(value);
     }
 
-    console.log(myValues);
-
     this.renderChart({
-      labels: myKeys, myValues,
+      labels: myKeys,
       datasets: [
         {
           label: 'Created Boards per Month',
@@ -41,7 +49,7 @@ export default Bar.extend({
           borderWidth: 1,
           pointBorderColor: 'white',
           backgroundColor: this.gradient,
-          data: myKeys,
+          data: myValues,
         }, {
           label: 'Source: Remote Retro-Tool',
           borderColor: '#05CBE1',
@@ -49,7 +57,7 @@ export default Bar.extend({
           pointBorderColor: 'white',
           borderWidth: 1,
           backgroundColor: this.gradient2,
-          data: myValues,
+          data: 0,
         },
       ],
     }, { reponsive: true, maintainAspectRatio: false });
